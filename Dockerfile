@@ -2,7 +2,7 @@ FROM php:5.6
 
 # Install required linux packages 
 RUN apt-get update -y && \
-    apt-get install -y libmcrypt-dev libssl-dev git-core libsqlite3-dev libmysqlclient18 python-pip libgd3 libpng3 libpng3-dev
+    apt-get install -y libmcrypt-dev libssl-dev git-core libsqlite3-dev libmysqlclient18 python-pip libgd3 libpng3 libpng3-dev libjpeg62
 
 # Install php extensions 
 RUN docker-php-ext-install mcrypt mbstring zip pcntl pdo_sqlite pdo_mysql gd
