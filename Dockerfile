@@ -1,23 +1,29 @@
 FROM alpine:edge
 
-#PHP requirements
-RUN apk update \
-    && apk add ca-certificates curl \
-    php-json php-zlib php-xml php-pdo php-phar php-openssl \
-    php-pdo_mysql \
-    php-pcntl \
-    php-sqlite3 \
-    php-pdo_sqlite \
-    php-posix \
-    php-zip \
-    php-gd php-iconv php-mcrypt \
-    php-curl php-ctype \
-    php-dom php-xmlreader && apk add -u musl && rm -rf /var/cache/apk/*
+ENV PACKER_VERSION 0.10.0
 
-#AWS CLI
-RUN apk -Uuv add groff less python py-pip && \
-    pip install awscli && \
-    apk --purge -v del py-pip && \
-    rm /var/cache/apk/*
+# Python, Pip
+RUN apk --update add python py-pip openssl ca-certificates    && \
+    apk --update add --virtual build-dependencies \
+                python-dev libffi-dev openssl-dev build-base  && \
+    pip install --upgrade pip cffi
 
-RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+# AWS-Cli
+RUN apk -Uuv add groff                && \
+    pip install awscli
+
+# Ansible
+RUN pip install ansible==1.9.4
+
+# Packer
+RUN cd /tmp/packer                    &&\
+    apk add --update bash curl openssh-client git unzip &&\
+    curl -O -sS -L https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip &&\
+    unzip packer_${PACKER_VERSION}_linux_amd64.zip &&\
+    apk del unzip                     &&\
+    mv packer* /usr/local/bin
+
+# Clean up
+RUN apk del build-dependencies            && \
+    rm -rf /var/cache/apk/*               && \
+    rm -rf /tmp/packer
