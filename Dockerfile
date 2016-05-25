@@ -16,6 +16,7 @@ RUN apt-get update -y && \
     libfreetype6-dev \
     libpq-dev \
     libxml2-dev \
+    imagemagick \
     && rm -rf /var/lib/apt/lists/*
 
 # Install php extensions
