@@ -12,6 +12,7 @@ RUN apk update \
     php-zip \
     php-gd php-iconv php-mcrypt \
     php-curl php-ctype \
+    imagemagick \
     php-dom php-xmlreader && apk add -u musl && rm -rf /var/cache/apk/*
 
 #AWS CLI
