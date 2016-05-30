@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-ENV PACKER_VERSION 0.10.0
+ENV PACKER_VERSION 0.7.5
 
 # Install Ansible
 RUN apk --update add python py-pip openssl ca-certificates    && \
