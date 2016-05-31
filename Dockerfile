@@ -8,6 +8,12 @@ RUN apk update && \
     wget && \
     wget -q -O /terraform.zip https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip && \
     unzip /terraform.zip -d /bin && \
+    find /bin -type f \
+    -not -name 'busybox' \
+    -not -name 'terraform' \
+    -not -name 'terraform-provider-aws' \
+    -not -name 'terraform-provider-terraform' \
+    -exec rm {} \; && \
     apk del --purge wget unzip && \
     rm -rf /var/cache/apk/* /terraform.zip
 
