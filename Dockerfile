@@ -1,28 +1,25 @@
-FROM php:5.6 
+FROM alpine:3.4
 
-# Install required linux packages 
-RUN apt-get update -y && \
-    apt-get install -y libmcrypt-dev \
-    libssl-dev \
-    git-core \
-    libsqlite3-dev \
-    libmysqlclient18 \
-    python-pip \
-    libgd3 \
-    libpng3 \
-    libpng3-dev \
-    libjpeg62 \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libpq-dev \
-    libxml2-dev \
-    zip \
-    && rm -rf /var/lib/apt/lists/*
+#PHP requirements
+RUN apk update \
+    && apk add ca-certificates curl \
+    php-json php-zlib php-xml php-pdo php-phar php-openssl \
+    php-pdo_mysql \
+    php-pcntl \
+    php-sqlite3 \
+    php-pdo_sqlite \
+    php-posix \
+    php-zip \
+    php-gd php-iconv php-mcrypt \
+    php-curl php-ctype \
+    imagemagick \
+    php-dom php-xmlreader \
+    java-common && apk add --no-cache openjdk7-jre=7.91.2.6.3-r2 && apk add -u musl && rm -rf /var/cache/apk/* && wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar
 
-# Install php extensions
- RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr --with-freetype-dir=/usr/include/freetype2 \
-        && docker-php-ext-install mcrypt mbstring zip pcntl pdo_sqlite pdo_mysql gd soap
-# Install awscli to help in aws deployments
-RUN pip install awscli
-# Install composer
+#AWS CLI
+RUN apk -Uuv add groff less python py-pip && \
+    pip install awscli && \
+    apk --purge -v del py-pip && \
+    rm /var/cache/apk/*
+
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
