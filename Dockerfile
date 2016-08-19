@@ -15,6 +15,7 @@ RUN apk update \
     imagemagick \
     php5-dom php5-xmlreader \
     xvfb \
+    git \
     java-common && apk add --no-cache openjdk7-jre=7.91.2.6.3-r2 && apk add -u musl && rm -rf /var/cache/apk/* && wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar
 
 #AWS CLI
