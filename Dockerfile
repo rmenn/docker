@@ -12,6 +12,7 @@ RUN apk update \
     php7-zip \
     php7-gd php7-iconv php7-mcrypt \
     php7-curl php7-ctype \
+    bash \
     imagemagick \
     php7-dom php7-xmlreader && apk add -u musl && ln -s /usr/bin/php7 /usr/bin/php && rm -rf /var/cache/apk/*
 
