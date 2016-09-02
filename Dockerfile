@@ -26,3 +26,4 @@ RUN apt-get update -y && \
 RUN pip install awscli
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+
