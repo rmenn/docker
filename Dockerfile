@@ -6,6 +6,7 @@ RUN apk update \
     php7-json php7-zlib php7-xml php7-pdo php7-phar php7-openssl \
     php7-pdo_mysql \
     php7-pcntl \
+    php7-mbstring \
     php7-sqlite3 \
     php7-pdo_sqlite \
     php7-posix \
