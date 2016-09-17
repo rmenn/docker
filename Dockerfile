@@ -19,6 +19,7 @@ RUN apk update \
     bash \
     git \
     imagemagick \
+    zip \
     php7-dom php7-xmlreader && apk add -u musl && ln -s /usr/bin/php7 /usr/bin/php && rm -rf /var/cache/apk/*
 
 #AWS CLI
