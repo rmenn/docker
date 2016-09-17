@@ -12,6 +12,7 @@ RUN apk update \
     php7-posix \
     php7-zip \
     php7-session \
+    php7-soap \
     php7-gd php7-iconv php7-mcrypt \
     php7-curl php7-ctype \
     coreutils \
