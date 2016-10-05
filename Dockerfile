@@ -7,6 +7,7 @@ RUN apk update \
     curl \
     xvfb \
     git \
+    bash \
     lsof \
     openjdk7 \
     xvfb \
