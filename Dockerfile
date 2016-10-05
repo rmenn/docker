@@ -9,7 +9,6 @@ RUN apk update \
     git \
     bash \
     lsof \
-    openjdk7 \
     xvfb \
     nodejs \
     wget \
