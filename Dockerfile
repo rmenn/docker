@@ -1,9 +1,19 @@
 FROM alpine:3.4
+MAINTAINER Joy Bhattacherjee <joy.bhattacherjee@gmail.com>
 
 #PHP requirements
 RUN apk update \
     && apk add ca-certificates \
     curl \
+    xvfb \
+    git \
+    lsof \
+    openjdk7 \
+    xvfb \
+    nodejs \
+    wget \
+    java-common \
+    firefox-esr \
     php5-json \
     php5-zlib \
     php5-xml \
@@ -24,16 +34,6 @@ RUN apk update \
     imagemagick \
     php5-dom \
     php5-xmlreader \
-    xvfb \
-    git \
-    lsof \
-    openjdk7 \
-    xvfb \
-    nodejs \
-    npm \
-    wget \
-    java-common \
-    firefox \
     && apk add --no-cache openjdk7-jre=7.91.2.6.3-r2 \
     && apk add -u musl \
     && rm -rf /var/cache/apk/* \
