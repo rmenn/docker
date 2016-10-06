@@ -1,48 +1,50 @@
-FROM alpine:3.4
+FROM ubuntu:14.04
 MAINTAINER Joy Bhattacherjee <joy.bhattacherjee@gmail.com>
+RUN locale-gen en_US.UTF-8
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
-#PHP requirements
-RUN apk update \
-    && apk add ca-certificates \
+RUN apt-get update \
+    && apt-get -y install software-properties-common \
+    python-software-properties \
+    && add-apt-repository ppa:ondrej/php \
+    && apt-get update \
+    && apt-get -y install \
+    ca-certificates \
     curl \
     xvfb \
     git \
     bash \
     lsof \
-    xvfb \
     nodejs \
     wget \
     java-common \
-    firefox-esr \
-    php5-json \
-    php5-zlib \
-    php5-xml \
-    php5-pdo \
-    php5-phar \
-    php5-openssl \
-    php5-pdo_mysql \
-    php5-pcntl \
-    php5-sqlite3 \
-    php5-pdo_sqlite \
-    php5-posix \
-    php5-zip \
-    php5-gd \
-    php5-iconv \
-    php5-mcrypt \
-    php5-curl \
-    php5-ctype \
+    firefox \
+    php5.6 \
+    php5.6-json \
+    php5.6-xml \
+    php5.6-pdo \
+    php5.6-phar \
+    php5.6-mysql \
+    php5.6-sqlite \
+    php5.6-posix \
+    php5.6-zip \
+    php5.6-iconv \
+    php5.6-mcrypt \
+    php5.6-curl \
+    php5.6-ctype \
+    php5.6-dom \
+    php5.6-xmlreader \
     imagemagick \
-    php5-dom \
-    php5-xmlreader \
-    && apk add --no-cache openjdk7-jre=7.91.2.6.3-r2 \
-    && apk add -u musl \
-    && rm -rf /var/cache/apk/* \
+    openjdk-7-jre-headless \
+    musl \
+    && rm -rf /var/lib/cache /var/lib/log /tmp/*\
     && wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar
 
 #AWS CLI
-RUN apk -Uuv add groff less python py-pip && \
+RUN apt-get -y install groff less python python-pip && \
     pip install awscli && \
-    apk --purge -v del py-pip && \
-    rm /var/cache/apk/*
+    apt-get -y purge python-pip wget \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/cache /var/lib/log /tmp/*
 
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
