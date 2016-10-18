@@ -7,7 +7,7 @@ RUN apk --update add python py-pip openssl ca-certificates    && \
     apk --update add --virtual build-dependencies python-dev libffi-dev openssl-dev build-base  && \
     pip install --upgrade pip cffi        && \
     pip install awscli                    && \
-    pip install ansible==1.9.4            && \
+    pip install ansible==2.2.0            && \
     apk del build-dependencies            && \
     rm -rf /var/cache/apk/*
 
