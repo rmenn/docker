@@ -1,13 +1,13 @@
 FROM alpine:3.4
 
-ENV PACKER_VERSION 0.10.1
+ENV PACKER_VERSION 0.11.0
 
 # Install Ansible
 RUN apk --update add python py-pip openssl ca-certificates    && \
     apk --update add --virtual build-dependencies python-dev libffi-dev openssl-dev build-base  && \
     pip install --upgrade pip cffi        && \
     pip install awscli                    && \
-    pip install ansible==2.2.0            && \
+    pip install ansible==2.1.2.0          && \
     apk del build-dependencies            && \
     rm -rf /var/cache/apk/*
 
