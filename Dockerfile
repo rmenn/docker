@@ -1,28 +1,31 @@
-FROM php:5.6 
+FROM alpine:edge
 
-# Install required linux packages 
-RUN apt-get update -y && \
-    apt-get install -y libmcrypt-dev \
-    libssl-dev \
-    git-core \
-    libsqlite3-dev \
-    libmysqlclient18 \
-    python-pip \
-    libgd3 \
-    libpng3 \
-    libpng3-dev \
-    libjpeg62 \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libpq-dev \
-    libxml2-dev \
+#php5 requirements
+RUN apk update \
+    && apk add ca-certificates curl \
+    php5-json php5-zlib php5-xml php5-pdo php5-phar php5-openssl \
+    php5-pdo_mysql \
+    php5-pcntl \
+    php5-mbstring \
+    php5-sqlite3 \
+    php5-pdo_sqlite \
+    php5-posix \
+    php5-zip \
+    php5-session \
+    php5-soap \
+    php5-gd php5-iconv php5-mcrypt \
+    php5-curl php5-ctype \
+    coreutils \
+    bash \
+    git \
+    imagemagick \
     zip \
-    && rm -rf /var/lib/apt/lists/*
+    php5-dom php5-xmlreader && apk add -u musl && ln -s /usr/bin/php5 /usr/bin/php && rm -rf /var/cache/apk/*
 
-# Install php extensions
- RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr --with-freetype-dir=/usr/include/freetype2 \
-        && docker-php-ext-install mcrypt mbstring zip pcntl pdo_sqlite pdo_mysql gd soap
-# Install awscli to help in aws deployments
-RUN pip install awscli
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
+#AWS CLI
+RUN apk -Uuv add groff less python py2-pip && \
+    pip install awscli && \
+    apk --purge -v del py2-pip && \
+    rm /var/cache/apk/*
+
+RUN curl -sS https://getcomposer.org/installer | php5 && mv composer.phar /usr/local/bin/composer
