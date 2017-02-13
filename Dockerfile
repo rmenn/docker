@@ -16,7 +16,7 @@ RUN apk update \
     php7-gd php7-iconv php7-mcrypt \
     php7-curl php7-ctype php7-bcmath\
     coreutils \
-    gcm \
+    gmp \
     bash \
     git \
     imagemagick \
