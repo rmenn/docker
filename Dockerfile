@@ -25,9 +25,16 @@ RUN apk update \
     mysql-client \
     musl \
     php7-dom php7-xmlreader && \
+
     sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php7/php.ini && \
     apk add -u musl && \
     ln -s /usr/bin/php7 /usr/bin/php && \
     rm -rf /var/cache/apk/* && \
     curl -sS https://getcomposer.org/installer | php7 && mv composer.phar /usr/local/bin/composer && \
     mkdir /app/
+
+COPY files/nginx.conf /etc/nginx/
+
+COPY files/php-fpm.conf /etc/php7/
+
+COPY files/www.conf /etc/php7/php-fpm.d
