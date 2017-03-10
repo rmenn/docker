@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM frolvlad/alpine-glibc
 
 #php7 requirements
 RUN apk update \
@@ -32,6 +32,12 @@ RUN apk update \
     rm -rf /var/cache/apk/* && \
     curl -sS https://getcomposer.org/installer | php7 && mv composer.phar /usr/local/bin/composer && \
     mkdir /app/
+
+RUN apk add --update --repository http://dl-3.alpinelinux.org/alpine/v3.5/community firefox-esr
+
+RUN apk add --update --repository http://dl-3.alpinelinux.org/alpine/edge/testing \
+    --repository http://dl-3.alpinelinux.org/alpine/edge/community yarn && \
+    yarn global add gulp
 
 COPY files/nginx.conf /etc/nginx/
 
