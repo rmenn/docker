@@ -14,6 +14,7 @@ RUN apk update \
     php7-session \
     php7-soap \
     php7-apache2 \
+    php7-gmp php7-bcmath \
     php7-gd php7-iconv php7-mcrypt \
     php7-curl php7-ctype \
     coreutils \
