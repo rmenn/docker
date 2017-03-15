@@ -33,8 +33,6 @@ RUN apk update \
     curl -sS https://getcomposer.org/installer | php7 && mv composer.phar /usr/local/bin/composer && \
     mkdir /app/
 
-RUN apk add --update --repository http://dl-3.alpinelinux.org/alpine/v3.5/community firefox-esr
-
 RUN apk add --update --repository http://dl-3.alpinelinux.org/alpine/edge/testing \
     --repository http://dl-3.alpinelinux.org/alpine/edge/community yarn && \
     yarn global add gulp
