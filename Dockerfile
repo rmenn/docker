@@ -16,6 +16,7 @@ RUN apk update \
     php7-fpm \
     php7-gd php7-iconv php7-mcrypt \
     php7-curl php7-ctype \
+    php7-bcmath php7-gmp \
     coreutils \
     bash \
     git \
