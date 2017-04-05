@@ -1,6 +1,6 @@
 FROM alpine:3.4
 
-ENV PACKER_VERSION 0.11.0
+ENV PACKER_VERSION 1.0.0
 
 # Install Ansible
 RUN apk --update add python py-pip openssl ca-certificates    && \
