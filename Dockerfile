@@ -1,8 +1,8 @@
 FROM alpine:3.5
 
 #php7 requirements
-RUN apk update \
-    && apk add ca-certificates curl \
+RUN apk add --update \
+    ca-certificates curl \
     php7-json php7-zlib php7-xml php7-pdo php7-phar php7-openssl \
     php7-pdo_mysql \
     php7-pcntl \
@@ -21,11 +21,17 @@ RUN apk update \
     git \
     imagemagick \
     zip \
-    php7-dom php7-xmlreader && apk add -u musl && ln -s /usr/bin/php7 /usr/bin/php && rm -rf /var/cache/apk/*
+    python \
+    python-dev \
+    py-pip \
+    php7-dom php7-xmlreader && \
+    apk add -u musl && \
+    ln -s /usr/bin/php7 /usr/bin/php && \
+    rm -rf /var/cache/apk/*
 
 #AWS CLI
 RUN apk -Uuv add groff less python py2-pip && \
-    pip install awscli && \
+    pip install awscli request && \
     apk --purge -v del py2-pip && \
     rm /var/cache/apk/*
 
