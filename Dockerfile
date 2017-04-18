@@ -31,7 +31,7 @@ RUN apk add --update \
 
 #AWS CLI
 RUN apk -Uuv add groff less python py2-pip && \
-    pip install awscli request && \
+    pip install awscli requests && \
     apk --purge -v del py2-pip && \
     rm /var/cache/apk/*
 
