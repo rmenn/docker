@@ -1,6 +1,5 @@
-# RZP-Baker
+# RZP-lambda
 ## Docker Container
 
-RZP-Baker is the Docker container to be used by `Wercker` to bake AWS AMIs
-(Amazon Machine Images) in response to a deploy event on the `brahma` wercker
-app.
+RZP-lambda is the Docker container to be used by `Wercker` to package lambda functions
+into deployable packages that are synced to AWS S3 bucket
