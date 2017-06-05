@@ -1,6 +1,6 @@
 FROM alpine:3.4
 
-ENV VERSION 0.6.16
+ENV VERSION 0.9.6
 
 RUN apk update && \
     apk add ca-certificates curl \
